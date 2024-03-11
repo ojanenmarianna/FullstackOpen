@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 
+import './index.css'
 import Filter from './components/filter'
 import NewPersonForm from './components/newPersonForm'
 import PersonsToShow from './components/showPersons'
@@ -66,6 +67,10 @@ const App = () => {
           setNewName('')
           setSuccessMessage(`Person ${newName} was added succesfully`);
           setTimeout(() => setSuccessMessage(null), 4000);
+        })
+        .catch(error => {
+          setErrorMessage(`Name ${newName} is shorter than the mimum allowed length (3)`)
+          setTimeout(() => setErrorMessage(null), 4000);
         })
     }
   }
