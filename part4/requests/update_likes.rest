@@ -1,9 +1,9 @@
-POST http://localhost:3003/api/blogs
+PUT http://localhost:3003/api/blogs/1
 Content-Type: application/json
 
 {
     "title": "Uusi blogi",
     "author": "Testaaja",
     "url": "https://fullstackopen.com/osa4/sovelluksen_rakenne_ja_testauksen_alkeet",
-    "likes": "3"
+    "likes": "6"
 }
