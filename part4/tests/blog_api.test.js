@@ -13,7 +13,7 @@ beforeEach(async () => {
     await Blog.insertMany(helper.initialBlogs)
 })
 
-describe('GET /api/blogs', () => {
+describe('when there are intially some blogs saved', () => {
     test('blogs are returned as json', async () => {
         await api
             .get('/api/blogs')
@@ -35,14 +35,14 @@ describe('GET /api/blogs', () => {
 
     test('a specific blog can be viewed', async () => {
         const blogsAtStart = await helper.blogsInDb()
-      
+
         const blogToView = blogsAtStart[0]
-      
+
         const resultBlog = await api
             .get(`/api/blogs/${blogToView.id}`)
             .expect(200)
             .expect('Content-Type', /application\/json/)
-      
+
         assert.deepStrictEqual(resultBlog.body, blogToView)
     })
 })
@@ -55,53 +55,53 @@ describe('addition of a blog', () => {
             url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
             likes: 10
         }
-        
+
         await api
             .post('/api/blogs')
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
-        
+
         const response = await api.get('/api/blogs')
-        
+
         const title = response.body.map(r => r.title)
-        
+
         assert.strictEqual(response.body.length, helper.initialBlogs.length + 1)
-        
+
         assert(title.includes('First class tests'))
     })
 
     test('blog without title is not added', async () => {
         const newBlog = {
-            autho: 'Robert C. Martin',
+            author: 'Robert C. Martin',
             url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
             likes: 10
         }
-        
+
         await api
             .post('/api/blogs')
             .send(newBlog)
             .expect(400)
-      
+
         const response = await api.get('/api/blogs')
-      
+
         assert.strictEqual(response.body.length, helper.initialBlogs.length)
     })
-        
+
     test('blog without author is not added', async () => {
         const newBlog = {
             title: 'First class tests',
             url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
             likes: 10
         }
-        
+
         await api
             .post('/api/blogs')
             .send(newBlog)
             .expect(400)
-      
+
         const response = await api.get('/api/blogs')
-      
+
         assert.strictEqual(response.body.length, helper.initialBlogs.length)
     })
 
@@ -111,14 +111,14 @@ describe('addition of a blog', () => {
             author: 'Robert C. Martin',
             likes: 10
         }
-        
+
         await api
             .post('/api/blogs')
             .send(newBlog)
             .expect(400)
-      
+
         const response = await api.get('/api/blogs')
-      
+
         assert.strictEqual(response.body.length, helper.initialBlogs.length)
     })
 
@@ -126,24 +126,24 @@ describe('addition of a blog', () => {
         const newBlog = {
             title: 'First class tests',
             author: 'Robert C. Martin',
-            url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
+            url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll'
         }
-        
+
         await api
             .post('/api/blogs')
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
-      
+
         const response = await api.get('/api/blogs')
         const addedBlog = response.body.find(blog => blog.title === newBlog.title)
-      
+
         assert.strictEqual(addedBlog.likes, 0)
     })
 })
 
 describe('deletion of a blog', () => {
-    test('a note can be deleted', async () => {
+    test('a blog can be deleted', async () => {
         const blogsAtStart = await helper.blogsInDb()
         const blogToDelete = blogsAtStart[0]
 
@@ -163,7 +163,7 @@ describe('deletion of a blog', () => {
 describe('updating a blog', () => {
     test('updating likes of an existing blog', async () => {
         const blogsAtStart = await helper.blogsInDb()
-      
+
         const blogToUpdate = blogsAtStart[0]
 
         const newBlog = {
