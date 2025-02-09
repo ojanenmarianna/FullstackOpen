@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNjc4ZDFiMGVhZjczMzlmZDgwZDRlYTcwIiwiaWF0IjoxNzM3OTA4MzMwfQ.V2MYqvGjeBzCvOwc1uFZxCLftonfsPzNdH6pO4svN4c
 
 {
-    "title": "Uusi blogi",
-    "author": "Testaaja",
+    "title": "New blog",
     "url": "https://fullstackopen.com/osa4/sovelluksen_rakenne_ja_testauksen_alkeet",
-    "likes": "3"
+    "likes": "3",
+    "userId": "678d1b0eaf7339fd80d4ea70"
 }
