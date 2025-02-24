@@ -25,7 +25,7 @@ blogsRouter.post('/', middleware.userExtractor, async (request, response) => {
     const blog = new Blog({
         title: body.title,
         url: body.url,
-        author: user.username,
+        author: body.author,
         likes: body.likes,
         user: user.id
     })
