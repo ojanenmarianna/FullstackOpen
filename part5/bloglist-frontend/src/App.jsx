@@ -6,6 +6,7 @@ import Notification from './components/notifications'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import BlogForm from './components/BlogForm'
+import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
 
 const App = () => {
@@ -68,30 +69,6 @@ const App = () => {
       console.log('Error:', error)
     }
   }
-
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-      <div>
-        username
-        <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
-        password
-        <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">login</button>
-    </form>
-  )
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -161,7 +138,11 @@ const App = () => {
       {user === null ?
         <div>
           <h1>Log in to application</h1>
-          {loginForm()}
+          <LoginForm handleSubmit={handleLogin}
+            handleUsernameChange={event => setUsername(event.target.value)}
+            handlePasswordChange={event => setPassword(event.target.value)}
+            username={username}
+            password={password} />
         </div> :
         <div>
           <h1>Blogs app</h1>
