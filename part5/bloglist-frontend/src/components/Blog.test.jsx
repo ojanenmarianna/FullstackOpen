@@ -7,7 +7,7 @@ const blog = {
   author: 'Joku Kumma',
   url: 'https://fullstackopen.com/en/part5/testing_react_apps',
   likes: 0,
-  user: { name: 'root' }
+  user: { name: 'root' },
 }
 
 describe('<Blog />', () => {

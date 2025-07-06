@@ -6,14 +6,14 @@ const url = process.env.TEST_MONGODB_URI
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url).then(() => {
-    const noteSchema = new mongoose.Schema({
-        content: String,
-        important: Boolean,
-    })
+  const noteSchema = new mongoose.Schema({
+    content: String,
+    important: Boolean,
+  })
 
-    const Blog = mongoose.model('Blog', noteSchema)
+  const Blog = mongoose.model('Blog', noteSchema)
 
-    /*
+  /*
     const blogs = [
         {
             title: 'Go To Statement Considered Harmful',
@@ -38,10 +38,10 @@ mongoose.connect(url).then(() => {
     await Blog.insertMany(blogs)
     */
 
-    Blog.find({}).then(result => {
-        result.forEach(blog => {
-            console.log(blog)
-        })
-        mongoose.connection.close()
+  Blog.find({}).then((result) => {
+    result.forEach((blog) => {
+      console.log(blog)
     })
+    mongoose.connection.close()
+  })
 })
