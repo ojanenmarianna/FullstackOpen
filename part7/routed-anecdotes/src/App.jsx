@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import {
   BrowserRouter as Router,
-  Routes, Route, Link, useParams, useNavigate
+  Routes, Route, Link, useParams
 } from 'react-router-dom'
+import CreateNew from './components/CreateNew'
 
 const Anecdote = ({ anecdotes }) => {
   const { id } = useParams()
@@ -67,48 +68,6 @@ const Footer = () => (
     See <a href='https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js'>https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js</a> for the source code.
   </div>
 )
-
-const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
-  const navigate = useNavigate()
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    props.addNew({
-      content,
-      author,
-      info,
-      votes: 0
-    })
-
-    props.setNotification(`a new anecdote "${content}" created!`)
-    navigate('/')
-  }
-
-  return (
-    <div>
-      <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
-        </div>
-        <div>
-          author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
-        </div>
-        <div>
-          url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
-        </div>
-        <button>create</button>
-      </form>
-    </div>
-  )
-
-}
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
